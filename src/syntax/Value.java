@@ -1,3 +1,6 @@
 package syntax;
 
-public class Value extends Expression{}
+public class Value extends Expression{
+	
+	
+}
