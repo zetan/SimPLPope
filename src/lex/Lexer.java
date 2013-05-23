@@ -805,6 +805,7 @@ public static void main(String [] args) throws IOException
           { 
           }
         case 84: break;
+        case -1: return  symbol(sym.EOF);
         default: 
           if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
             zzAtEOF = true;

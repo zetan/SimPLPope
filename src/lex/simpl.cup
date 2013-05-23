@@ -1,0 +1,56 @@
+
+// CUP specification for a simple expression evaluator (w/ actions)
+//parser.cup
+import java_cup.runtime.*;
+
+/**//* Preliminaries to set up and use the scanner.  */
+init with {: scanner.init();              :};
+scan with {: return getScanner().next_token(); :};
+
+terminal  INT;
+terminal  VAR;
+terminal  IF;
+terminal  THEN;
+terminal  ELSE;
+terminal  END;
+terminal  WHILE;
+terminal  DO;
+terminal  EQ;
+terminal  LT;
+terminal  GT;
+terminal  PLUS;
+terminal  MINUS;
+terminal  TIMES;  
+terminal  DIVIDE;
+terminal  AND;
+terminal  OR;
+terminal  UNARY_MINUS;
+terminal  NEGATION;
+terminal  LET;
+terminal  IN;
+terminal  LEFT_PAREN;
+terminal  RIGHT_PAREN;
+terminal  COMMA;
+terminal  APPEND;
+terminal  SEQUENCE; 
+terminal  ASSIGN; 
+terminal  NIL;
+terminal  HEAD;
+terminal  TAIL;
+terminal  FST;
+terminal  SND;
+terminal  FUN;
+terminal  ARROW; 
+terminal  TRUE;
+terminal  FALSE;
+terminal  END_OF_PROGRAM;
+
+
+non terminal Integer    expr;
+/**//* The grammar */
+
+              
+expr	::= VAR;
+
+
+
