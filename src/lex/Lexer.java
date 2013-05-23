@@ -5,7 +5,6 @@ package lex;
 import java.io.*;
 import java.util.ArrayList;
 import syntax.*;
-import java_cup.sym;
 import java_cup.runtime.*;
 
 /**
@@ -282,10 +281,8 @@ public static void main(String [] args) throws IOException
 	//create a scanner and use the scanner's yylex function
 	//if you want standard input, System.in instead of new FileReader(args[0])
 	Lexer lexer = new Lexer(new FileReader("src/TestProgram"));
-	lexer.yylex();
-	for(Symbol symbol : symbolList) symbol.Print();
+	lexer.next_token();
 	
-	System.out.println("Characters: " + charCount + " Words: " + wordCount +" Lines: " +lineCount);
 }
 
 
@@ -516,7 +513,7 @@ public static void main(String [] args) throws IOException
    * @return      the next token
    * @exception   java.io.IOException  if any I/O-Error occurs
    */
-  public Object yylex() throws java.io.IOException {
+  public Object next_token() throws java.io.IOException {
     int zzInput;
     int zzAction;
 

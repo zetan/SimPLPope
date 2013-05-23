@@ -29,9 +29,7 @@ public static void main(String [] args) throws IOException
 	//if you want standard input, System.in instead of new FileReader(args[0])
 	Lexer lexer = new Lexer(new FileReader("src/TestProgram"));
 	lexer.yylex();
-	for(Symbol symbol : symbolList) symbol.Print();
 	
-	System.out.println("Characters: " + charCount + " Words: " + wordCount +" Lines: " +lineCount);
 }
 %}
 %type Object //this line changes the return type of yylex into Object

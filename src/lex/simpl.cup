@@ -4,7 +4,7 @@
 import java_cup.runtime.*;
 
 /**//* Preliminaries to set up and use the scanner.  */
-init with {: scanner.init();              :};
+init with {: Lexer.init();              :};
 scan with {: return getScanner().next_token(); :};
 
 terminal  INT;
