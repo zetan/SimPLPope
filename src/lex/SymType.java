@@ -1,6 +1,9 @@
 package lex;
 
 public enum SymType {
+	
+	
+	
 	INT,
 	VAR,
 	IF,
@@ -37,5 +40,17 @@ public enum SymType {
 	ARROW, // ->
 	TRUE,
 	FALSE,
-	END_OF_PROGRAM,
+	END_OF_PROGRAM;
+	 private final int value;
+	 private SymType() {
+		this.value = 0;
+	}
+	 private SymType(int value) {
+	        this.value = value;
+	    }
+	 public int getValue() {
+	        return value;
+	    }
 };
+
+

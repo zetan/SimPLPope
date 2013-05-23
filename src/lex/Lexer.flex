@@ -3,6 +3,7 @@ package lex;
 import java.io.*;
 import java.util.ArrayList;
 import syntax.*;
+import java_cup.runtime.*;
 %%
 %class Lexer
 %unicode
@@ -14,7 +15,13 @@ import syntax.*;
 static int charCount = 0, wordCount = 0, lineCount = 0;
 static java.util.List<Symbol> symbolList = new ArrayList<Symbol>();
 
-
+public static void init(){}/**//* JustÎªÁË¼æÈÝÊÖÐ´°æ*/
+    private Symbol symbol(int type){
+        return new Symbol(type,yyline,yycolumn); 
+    }
+    private Symbol symbol(int type,Object value){
+        return new Symbol(type,yyline,yycolumn,value);
+    }
 
 public static void main(String [] args) throws IOException
 {
@@ -38,47 +45,47 @@ identifier      = {letter}({alphanumeric}|{other_id_char})*
 
 %%
 
-if				{symbolList.add( new Symbol(SymType.IF, yyline));}
-then			{symbolList.add( new Symbol(SymType.THEN, yyline));}
-else			{symbolList.add( new Symbol(SymType.ELSE, yyline));}
-end				{symbolList.add( new Symbol(SymType.END, yyline));}
-while			{symbolList.add( new Symbol(SymType.WHILE, yyline));}
-do				{symbolList.add( new Symbol(SymType.DO, yyline));}
-let				{symbolList.add( new Symbol(SymType.LET, yyline));}
-in				{symbolList.add( new Symbol(SymType.IN, yyline));}
-nil				{symbolList.add( new Symbol(SymType.NIL, yyline));}
-head			{symbolList.add( new Symbol(SymType.HEAD, yyline));}
-tail			{symbolList.add( new Symbol(SymType.TAIL, yyline));}
-fst				{symbolList.add( new Symbol(SymType.FST, yyline));}
-snd				{symbolList.add( new Symbol(SymType.SND, yyline));}
-true			{symbolList.add( new Symbol(SymType.TRUE, yyline));}
-false			{symbolList.add( new Symbol(SymType.FALSE, yyline));}
-fun				{symbolList.add( new Symbol(SymType.FUN, yyline));}
-"->"			{symbolList.add( new Symbol(SymType.ARROW, yyline));}
-"="				{symbolList.add( new Symbol(SymType.EQ, yyline));}
-"<"				{symbolList.add( new Symbol(SymType.LT, yyline));}
-">"				{symbolList.add( new Symbol(SymType.GT, yyline));}
-"="				{symbolList.add( new Symbol(SymType.EQ, yyline));}
-"+"				{symbolList.add( new Symbol(SymType.PLUS, yyline));}
-"-"				{symbolList.add( new Symbol(SymType.MINUS, yyline));}
-"*"				{symbolList.add( new Symbol(SymType.TIMES, yyline));}
-"/"				{symbolList.add( new Symbol(SymType.DIVIDE, yyline));}
-and				{symbolList.add( new Symbol(SymType.AND, yyline));}
-or				{symbolList.add( new Symbol(SymType.OR, yyline));}
-"~"				{symbolList.add( new Symbol(SymType.UNARY_MINUS, yyline));}
-not				{symbolList.add( new Symbol(SymType.NEGATION, yyline));}
-"("				{symbolList.add( new Symbol(SymType.LEFT_PAREN, yyline));}
-")"				{symbolList.add( new Symbol(SymType.RIGHT_PAREN, yyline));}
-","				{symbolList.add( new Symbol(SymType.COMMA, yyline));}
-"::"			{symbolList.add( new Symbol(SymType.APPEND, yyline));}
-";"				{symbolList.add( new Symbol(SymType.SEQUENCE, yyline));}
-":="			{symbolList.add( new Symbol(SymType.ASSIGN, yyline));}
-"$"				{symbolList.add( new Symbol(SymType.END_OF_PROGRAM, yyline));}
+if				{return symbol(sym.IF);}
+then			{return symbol(sym.THEN);}
+else			{return symbol(sym.ELSE);}
+end				{return symbol(sym.END);}
+while			{return symbol(sym.WHILE);}
+do				{return symbol(sym.DO);}
+let				{return symbol(sym.LET);}
+in				{return symbol(sym.IN);}
+nil				{return symbol(sym.NIL);}
+head			{return symbol(sym.HEAD);}
+tail			{return symbol(sym.TAIL);}
+fst				{return symbol(sym.FST);}
+snd				{return symbol(sym.SND);}
+true			{return symbol(sym.TRUE);}
+false			{return symbol(sym.FALSE);}
+fun				{return symbol(sym.FUN);}
+"->"			{return symbol(sym.ARROW);}
+"="				{return symbol(sym.EQ);}
+"<"				{return symbol(sym.LT);}
+">"				{return symbol(sym.GT);}
+"="				{return symbol(sym.EQ);}
+"+"				{return symbol(sym.PLUS);}
+"-"				{return symbol(sym.MINUS);}
+"*"				{return symbol(sym.TIMES);}
+"/"				{return symbol(sym.DIVIDE);}
+and				{return symbol(sym.AND);}
+or				{return symbol(sym.OR);}
+"~"				{return symbol(sym.UNARY_MINUS);}
+not				{return symbol(sym.NEGATION);}
+"("				{return symbol(sym.LEFT_PAREN);}
+")"				{return symbol(sym.RIGHT_PAREN);}
+","				{return symbol(sym.COMMA);}
+"::"			{return symbol(sym.APPEND);}
+";"				{return symbol(sym.SEQUENCE);}
+":="			{return symbol(sym.ASSIGN);}
+"$"				{return symbol(sym.END_OF_PROGRAM);}
 "/*"            { yybegin(C_COMMENT); }
 <C_COMMENT>"*/" { yybegin(YYINITIAL); }
 <C_COMMENT>.    { }
-{intvalue}		{symbolList.add( new Symbol(SymType.INT, Integer.parseInt(yytext()), yyline));}
-{identifier}    {symbolList.add( new Symbol(SymType.VAR, new String(yytext()), yyline));}
+{intvalue}		{return symbol(sym.INT, Integer.parseInt(yytext()));}
+{identifier}    {return symbol(sym.VAR, new String(yytext()));}
 [\n]		{charCount++; lineCount++; }
 [\r]		{}
 .		{charCount++; }
