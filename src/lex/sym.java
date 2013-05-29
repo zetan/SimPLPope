@@ -48,5 +48,8 @@ public class sym {
   public static final int GT = 12;
   public static final int VAR = 3;
   public static final int DO = 9;
+  
+  public static final int VAL = 100;
+  public static final int EXPR = 101;
 }
 

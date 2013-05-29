@@ -13,7 +13,7 @@ import java_cup.runtime.*;
  * on 13-5-23 ÏÂÎç7:59 from the specification file
  * <tt>D:/lessons/programming languages/project/SimPLPope/src/lex/Lexer.flex</tt>
  */
-class Lexer {
+public class Lexer implements Scanner{
 
   /** This character denotes the end of file */
   public static final int YYEOF = -1;
@@ -292,7 +292,7 @@ public static void main(String [] args) throws IOException
    *
    * @param   in  the java.io.Reader to read input from.
    */
-  Lexer(java.io.Reader in) {
+  public Lexer(java.io.Reader in) {
     this.zzReader = in;
   }
 
@@ -513,7 +513,7 @@ public static void main(String [] args) throws IOException
    * @return      the next token
    * @exception   java.io.IOException  if any I/O-Error occurs
    */
-  public Object next_token() throws java.io.IOException {
+  public Symbol next_token() throws java.io.IOException {
     int zzInput;
     int zzAction;
 
