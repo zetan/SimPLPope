@@ -18,4 +18,11 @@ public class UnaryOperation extends Expression{
 		}
 		return operator + e.toString();
 	}
+
+	public UnaryOperation(String s,Expression e) {
+		super();
+		this.e = e;
+		if(s == "not") this.op = UnaryOperator.not;	
+		if(s == "~")this.op = UnaryOperator.negative;
+	}
 }

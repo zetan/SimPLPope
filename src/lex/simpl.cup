@@ -1,4 +1,4 @@
-
+package lex;
 // CUP specification for a simple expression evaluator (w/ actions)
 //parser.cup
 import java_cup.runtime.*;

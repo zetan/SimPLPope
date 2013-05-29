@@ -15,4 +15,9 @@ public class IntValue extends Value{
 		else
 			return String.valueOf(value);
 	}
+	
+	public IntValue(Integer value){
+		this.value = value;
+	}
+	
 }

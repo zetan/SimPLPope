@@ -9,4 +9,9 @@ public class BoolValue extends Value{
 		else
 			return "false";
 	}
+
+	public BoolValue(boolean value) {
+		super();
+		this.value = value;
+	}
 }
