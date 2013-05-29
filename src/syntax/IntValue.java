@@ -17,6 +17,7 @@ public class IntValue extends Value{
 	}
 	
 	public IntValue(Integer value){
+		
 		this.value = value;
 	}
 	

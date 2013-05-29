@@ -9,7 +9,7 @@ init with {: Lexer.init();              :};
 scan with {: return getScanner().next_token();:};
 
 terminal  Integer INT;
-terminal  Variable VAR;
+terminal  String VAR;
 terminal  IF;
 terminal  THEN;
 terminal  ELSE;
@@ -67,6 +67,7 @@ precedence nonassoc FST, SND, HEAD, TAIL;
 expr  ::= VAR:v
     {:RESULT = new Variable(v);:}
     | val:v
+    {:RESULT = v;:}
     | expr:e1 APPEND expr:e2
     {:RESULT = new List(e1,e2);:}
     | LEFT_PAREN expr:e1 COMMA expr:e2 RIGHT_PAREN
@@ -99,8 +100,8 @@ expr  ::= VAR:v
     {:RESULT = new UnaryOperation("not",e1);:}
     
     | LET VAR:v EQ expr:e1 IN expr:e2 END
-    {:RESULT = new LetInEnd(v,e1,e2);:}
-    | IF expr:e1 THEN expr:e2 ELSE expr:e3
+    {:RESULT = new LetInEnd(new Variable(v),e1,e2);:}
+    | IF expr:e1 THEN expr:e2 ELSE expr:e3 END
     {:RESULT = new IfThenElse(e1,e2,e3);:}
       
     | expr:e1 ASSIGN expr:e2
@@ -132,7 +133,7 @@ val      ::= INT:i
     | LEFT_PAREN RIGHT_PAREN
     {:RESULT = new Nop();:}
     | FUN VAR:x ARROW expr:e1
-    {:RESULT = new AnonymousFunction(x,e1);:}
+    {:RESULT = new AnonymousFunction(new Variable(x),e1);:}
     | LEFT_PAREN val:v1 COMMA val:v2 RIGHT_PAREN
     {:RESULT = new Pair(v1,v2);:}
     | val:v1 APPEND val:v2
