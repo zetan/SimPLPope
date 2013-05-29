@@ -1,0 +1,140 @@
+// CUP specification for a simple expression evaluator (w/ actions)
+//parser.cup
+package lex;
+import syntax.*;
+import java_cup.runtime.*;
+
+/**//* Preliminaries to set up and use the scanner.  */
+init with {: Lexer.init();              :};
+scan with {: return getScanner().next_token();:};
+
+terminal  Integer INT;
+terminal  Variable VAR;
+terminal  IF;
+terminal  THEN;
+terminal  ELSE;
+terminal  END;
+terminal  WHILE;
+terminal  DO;
+terminal  EQ;
+terminal  LT;
+terminal  GT;
+terminal  PLUS;
+terminal  MINUS;
+terminal  TIMES;  
+terminal  DIVIDE;
+terminal  AND;
+terminal  OR;
+terminal  UNARY_MINUS;
+terminal  NEGATION;
+terminal  LET;
+terminal  IN;
+terminal  LEFT_PAREN;
+terminal  RIGHT_PAREN;
+terminal  COMMA;
+terminal  APPEND;
+terminal  SEQUENCE; 
+terminal  ASSIGN; 
+terminal  NIL;
+terminal  HEAD;
+terminal  TAIL;
+terminal  FST;
+terminal  SND;
+terminal  FUN;
+terminal  ARROW; 
+terminal  TRUE;
+terminal  FALSE;
+terminal  END_OF_PROGRAM;
+
+
+non terminal Expression expr;
+non terminal Expression val;
+/**//* The grammar */
+
+precedence nonassoc COMMA;
+precedence nonassoc SEQUENCE;
+precedence nonassoc ARROW;
+precedence nonassoc ASSIGN;
+precedence nonassoc APPEND;
+precedence left OR, AND;
+precedence nonassoc EQ , LT , GT ; 
+precedence left PLUS, MINUS;
+precedence left TIMES, DIVIDE;
+precedence left UNARY_MINUS,NEGATION;  
+precedence nonassoc FST, SND, HEAD, TAIL;         
+         
+         
+expr	::= VAR:v
+		{:RESULT = new Variable(v);:}
+		| val:v
+		| expr:e1 APPEND expr:e2
+		{:RESULT = new List(e1,e2);:}
+		| LEFT_PAREN expr:e1 COMMA expr:e2 RIGHT_PAREN
+		{:RESULT = new Pair(e1,e2);:}
+		| LEFT_PAREN expr:e1 expr:e2 RIGHT_PAREN
+		{:RESULT = new Application(e1,e2);:}
+		
+		| expr:e1 PLUS expr:e2
+		{:RESULT = new BinaryOperation(e1,"+",e2);:} 
+		| expr:e1 TIMES expr:e2 
+		{:RESULT = new BinaryOperation(e1,"*",e2);:} 
+		| expr:e1 DIVIDE expr:e2 
+		{:RESULT = new BinaryOperation(e1,"/",e2);:} 
+		| expr:e1 MINUS expr:e2 
+		{:RESULT = new BinaryOperation(e1,"-",e2);:} 
+		|expr:e1 OR expr:e2
+		{:RESULT = new BinaryOperation(e1,"or",e2);:}
+		|expr:e1 AND expr:e2
+		{:RESULT = new BinaryOperation(e1,"and",e2);:}
+		|expr:e1 EQ expr:e2
+		{:RESULT= new BinaryOperation(e1,"=",e2);:} 
+		|expr:e1 LT expr:e2 
+		{:RESULT = new BinaryOperation(e1,"<",e2);:} 
+		|expr:e1 GT expr:e2 
+		{:RESULT = new BinaryOperation(e1,">",e2);:} 
+	
+		| UNARY_MINUS expr:e1 
+		{:RESULT = new UnaryOperation("~",e1);:}
+		| NEGATION expr:e1
+		{:RESULT = new UnaryOperation("not",e1);:}
+		
+		| LET VAR:v EQ expr:e1 IN expr:e2 END
+		{:RESULT = new LetInEnd(v,e1,e2);:}
+		| IF expr:e1 THEN expr:e2 ELSE expr:e3
+		{:RESULT = new IfThenElse(e1,e2,e3);:}
+			
+		| expr:e1 ASSIGN expr:e2
+		{:RESULT = new Assignment(e1,e2);:}
+		| expr:e1 SEQUENCE expr:e2
+		{:RESULT = new Sequence(e1,e2);:}
+		| WHILE expr:e1 DO expr:e2 END
+		{:RESULT = new WhileDoEnd(e1,e2);:}
+		| FST expr:e1
+		{:RESULT =  new First(e1);:}
+		| SND expr:e1
+		{:RESULT = new Second(e1);:}
+		| HEAD expr:e1
+		{:RESULT = new Head(e1);:}
+		| TAIL expr:e1
+		{:RESULT = new Tail(e1);:}
+		| LEFT_PAREN expr:e1 RIGHT_PAREN
+		{:RESULT = new Bracket(e1);:}
+;		
+
+val	    ::= INT:i
+		{:RESULT = new IntValue(i);:}
+		| TRUE:t
+		{:RESULT = new BoolValue(true);:}
+		| FALSE:f
+		{:RESULT = new BoolValue(false);:}
+		| NIL:n
+		{:RESULT = new Nil();:}
+		| LEFT_PAREN RIGHT_PAREN
+		{:RESULT = new Nop();:}
+		| FUN VAR:x ARROW expr:e1
+		{:RESULT = new AnonymousFunction(x,e1);:}
+		| LEFT_PAREN val:v1 COMMA val:v2 RIGHT_PAREN
+		{:RESULT = new Pair(v1,v2);:}
+		| val:v1 APPEND val:v2
+		{:RESULT = new List(v1,v2);:}
+;
