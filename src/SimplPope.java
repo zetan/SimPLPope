@@ -11,7 +11,8 @@ public class SimplPope {
 			Parser parser = new Parser(
                 new Lexer(new FileReader("src/TestProgram")));
             Expression expression = (Expression) parser.parse().value;
-            System.out.println(expression.toString());
+            //System.out.println(expression.toString());
+            expression.CheckType();
         }
         catch (Exception e) {
             System.out.println("Exception ");

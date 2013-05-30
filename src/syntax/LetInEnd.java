@@ -1,5 +1,9 @@
 package syntax;
 
+import semantics.Env;
+import semantics.EnvStack;
+import semantics.Type;
+
 public class LetInEnd extends Expression{
 	Variable x;
 	Expression definition;
@@ -16,4 +20,22 @@ public class LetInEnd extends Expression{
 		this.body = body;
 	}
 
+	public boolean CheckType(){
+		Env env = new Env();
+		env.getVarSet().add(x.toString());
+		definition.CheckType();
+		env.getTypeMap().put(x.toString(), definition.getType());
+		x.setType(definition.getType());
+		EnvStack.getInstance().PushEnv(env);
+		
+		body.CheckType();
+		
+		
+		return true;
+	}
+	
+	public Type getType(){
+		this.type = body.getType();
+		return type;
+	}
 }
