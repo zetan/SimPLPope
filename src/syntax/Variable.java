@@ -22,6 +22,11 @@ public class Variable extends Expression{
 		return name;
 	}
 	
+	public Value Eval(){
+		CheckType();
+		return EnvStack.getInstance().getVarValue(this);
+	}
+	
 	public boolean CheckType(){
 		if(EnvStack.getInstance().getVarType(this) != null) return true;
 		else return false;

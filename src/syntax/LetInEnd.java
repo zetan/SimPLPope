@@ -19,20 +19,32 @@ public class LetInEnd extends Expression{
 		this.definition = definition;
 		this.body = body;
 	}
-
-	public boolean CheckType(){
+	
+	public Value Eval(){
+		//CheckType();
 		Env env = new Env();
 		env.getVarSet().add(x.toString());
-		definition.CheckType();
-		env.getTypeMap().put(x.toString(), definition.getType());
-		x.setType(definition.getType());
 		EnvStack.getInstance().PushEnv(env);
 		
-		body.CheckType();
+		Value xDef = definition.Eval();
+		env.getTypeMap().put(x.toString(), xDef.getType());				// set var type
+		EnvStack.getInstance().getVarEnv(x).AddValue(x.toString(), xDef);//set var value
+		EnvStack.getInstance().PushEnv(env);	
 		
-		
-		return true;
+		return body.Eval();
 	}
+
+/*	public boolean CheckType(){
+		Env env = new Env();
+		env.getVarSet().add(x.toString());
+		definition.CheckType(); 
+		env.getTypeMap().put(x.toString(), definition.getType());
+		x.setType(definition.getType());
+		EnvStack.getInstance().PushEnv(env);	
+		body.CheckType();
+	
+		return true;
+	}*/
 	
 	public Type getType(){
 		this.type = body.getType();

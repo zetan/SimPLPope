@@ -1,7 +1,11 @@
 package syntax;
 
+import java.awt.Window.Type;
+
 public class Value extends Expression{
-	int intValue;
+	
+	
+/*	int intValue;
 	boolean boolValue;
 	AnonymousFunction funcValue;
 	List listValue;
@@ -66,5 +70,5 @@ public class Value extends Expression{
 	public void setPair(Pair pair) {
 		this.pair = pair;
 	}
-	
+	*/
 }

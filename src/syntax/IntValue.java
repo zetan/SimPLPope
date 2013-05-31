@@ -1,5 +1,7 @@
 package syntax;
 
+import semantics.Type;
+
 public class IntValue extends Value{
 	boolean isUndef;
 	int value;
@@ -7,6 +9,11 @@ public class IntValue extends Value{
 	
 	public IntValue(String value){
 		this.value = Integer.parseInt(value);
+		type = Type.INT;
+	}
+	
+	public Value Eval(){
+		return this;
 	}
 	
 	public String toString(){

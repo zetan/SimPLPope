@@ -1,5 +1,7 @@
 package syntax;
 
+import semantics.Type;
+
 public class BoolValue extends Value{
 	boolean value;
 
@@ -13,5 +15,6 @@ public class BoolValue extends Value{
 	public BoolValue(boolean value) {
 		super();
 		this.value = value;
+		type = Type.BOOL;
 	}
 }
