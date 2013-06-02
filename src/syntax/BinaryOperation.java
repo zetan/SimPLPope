@@ -1,4 +1,6 @@
 package syntax;
+import semantics.EnvStack;
+import semantics.Type;
 
 public class BinaryOperation extends Expression{
 	enum BinaryOperator{
@@ -58,6 +60,61 @@ public class BinaryOperation extends Expression{
 		case "or":
 			this.op = BinaryOperator.or; break;
 		}
+	}
+	
+	public Value Eval(){
+		Value val = null;
+		try {	/* type checking */ 
+			if(this.op == BinaryOperator.plus)
+			{
+				
+				val = new IntValue(Integer.parseInt(e1.Eval().toString())+Integer.parseInt(e2.Eval().toString()));// evaluate, 
+				return val;		
+			}
+			switch(this.op){
+			
+			case plus:	val = new IntValue(Integer.parseInt(e1.Eval().toString())+Integer.parseInt(e2.Eval().toString()));// evaluate, 
+						return val;		
+						
+			case minus:	val = new IntValue(Integer.parseInt(e1.Eval().toString())-Integer.parseInt(e2.Eval().toString()));// evaluate, 
+						return val;	
+						
+			case times:	val = new IntValue(Integer.parseInt(e1.Eval().toString())*Integer.parseInt(e2.Eval().toString()));// evaluate, 
+						return val;	
+						
+			case devide:if(Integer.parseInt(e2.Eval().toString()) == 0){ System.out.println("num error"); return null;}val = new IntValue(Integer.parseInt(e1.Eval().toString())/Integer.parseInt(e2.Eval().toString()));// evaluate, 
+						return val;	
+					
+			case biggerThan: if(Integer.parseInt(e1.Eval().toString())>Integer.parseInt(e2.Eval().toString()))
+								val = new BoolValue(true);// evaluate, 
+							 else val = new BoolValue(false); 
+						return val;	
+				
+			case lessThan: if(Integer.parseInt(e1.Eval().toString())<Integer.parseInt(e2.Eval().toString()))
+				val = new BoolValue(true);// evaluate, 
+			 else val = new BoolValue(false); 
+		return val;	
+				
+			case equal: if(Integer.parseInt(e1.Eval().toString()) == Integer.parseInt(e2.Eval().toString()))
+				val = new BoolValue(true);// evaluate, 
+			 else val = new BoolValue(false); 
+		return val;	
+				
+			case and:
+				val = new IntValue(Integer.parseInt(e1.Eval().toString())&Integer.parseInt(e2.Eval().toString()));// evaluate, 
+				return val;	
+			case or:
+				val = new IntValue(Integer.parseInt(e1.Eval().toString())|Integer.parseInt(e2.Eval().toString()));// evaluate, 
+				return val;	
+			}
+			
+		} 
+		catch (Exception e) {
+				// TODO: handle exception
+			System.out.println("type error");
+		}
+		return null;
+		
 	}
 	
 }

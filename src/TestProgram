@@ -1,5 +1,8 @@
-let
-x = 1::2
-in
-head x
-end
+let 
+
+x = (if 1 then 1 else 2 end)
+
+in x
+
+end 
+

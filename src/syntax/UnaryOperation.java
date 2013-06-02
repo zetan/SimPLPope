@@ -25,4 +25,22 @@ public class UnaryOperation extends Expression{
 		if(s == "not") this.op = UnaryOperator.not;	
 		if(s == "~")this.op = UnaryOperator.negative;
 	}
+	
+	public Value Eval(){
+		Value val = null;
+		
+		try {
+			
+			if(this.op == UnaryOperator.negative) val = new IntValue(~Integer.parseInt(e.Eval().toString()));
+			if(this.op == UnaryOperator.not) val = new IntValue(-Integer.parseInt(e.Eval().toString()));	
+			return val;
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("head type error");
+		}
+		return null;
+
+		
+	}
 }

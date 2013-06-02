@@ -16,4 +16,28 @@ public class IfThenElse extends Expression{
 		this.thenClause = thenClause;
 		this.elseClause = elseClause;
 	}
+	
+	public Value Eval()
+	{
+		Value value = null;
+		try {
+			if( condition.Eval().toString() == "true")
+			{
+				return thenClause.Eval();
+			}
+			else if(Integer.parseInt(condition.Eval().toString()) > 0)
+			{
+				return thenClause.Eval();
+			}
+			else
+			{
+				return elseClause.Eval();
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("type error");
+		}
+		return value;
+	}
+	
 }

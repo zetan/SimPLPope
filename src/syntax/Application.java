@@ -1,5 +1,8 @@
 package syntax;
 
+import semantics.Env;
+import semantics.EnvStack;
+
 public class Application extends Expression{
 	Expression func;
 	Expression param;
@@ -14,5 +17,10 @@ public class Application extends Expression{
 		this.param = param;
 	}
 
+	public Value Eval()
+	{
+		
+		return param.Eval();
+	}
 
 }

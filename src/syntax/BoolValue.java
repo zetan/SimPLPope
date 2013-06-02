@@ -1,5 +1,7 @@
 package syntax;
 
+import java.security.PublicKey;
+
 import semantics.Type;
 
 public class BoolValue extends Value{
@@ -16,5 +18,10 @@ public class BoolValue extends Value{
 		super();
 		this.value = value;
 		type = Type.BOOL;
+	}
+	public Value Eval()
+	{
+		//BoolValue
+		return this;
 	}
 }

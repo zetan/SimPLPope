@@ -24,6 +24,10 @@ public class LetInEnd extends Expression{
 		//CheckType();
 		Env env = new Env();
 		env.getVarSet().add(x.toString());
+		
+		env.getTypeMap().put(x.toString(), definition.getType());
+		//env.getExpMap().put(x.toString(), (Value)definition);
+		
 		EnvStack.getInstance().PushEnv(env);
 		
 		Value xDef = definition.Eval();

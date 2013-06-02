@@ -11,4 +11,8 @@ public class Bracket extends Expression{
 	public String toString(){
 		return "(" + e.toString() + ")";
 	}
+	public Value Eval()
+	{
+		return e.Eval();
+	}
 }
