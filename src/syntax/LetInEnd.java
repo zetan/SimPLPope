@@ -8,7 +8,7 @@ public class LetInEnd extends Expression{
 	Variable x;
 	Expression definition;
 	Expression body;
-	
+	int orgStackNum;
 	public String toString(){
 		return "let " + x.toString() + " = " + definition.toString() + " in " + body.toString() + " end";
 	}
@@ -22,6 +22,7 @@ public class LetInEnd extends Expression{
 	
 	public Value Eval(){
 		//CheckType();
+		orgStackNum = EnvStack.getInstance().getStackNum();
 		Env env = new Env();
 		env.getVarSet().add(x.toString());
 		
@@ -34,7 +35,12 @@ public class LetInEnd extends Expression{
 		env.getTypeMap().put(x.toString(), xDef.getType());				// set var type
 		EnvStack.getInstance().getVarEnv(x).AddValue(x.toString(), xDef);//set var value
 		
-		return body.Eval();
+		Value value = body.Eval();
+		
+		int curStackNum =  EnvStack.getInstance().getStackNum();
+		for(int i = 0; i < curStackNum - orgStackNum; i++)
+			EnvStack.getInstance().PopEnv();
+		return value;
 	}
 
 /*	public boolean CheckType(){

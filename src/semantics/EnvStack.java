@@ -45,6 +45,10 @@ public class EnvStack {
 		envStack.remove(envStack.size() -1);
 	}
 	
+	public int getStackNum(){
+		return envStack.size();
+	}
+	
 	public static EnvStack getInstance(){
 		if(instance == null) instance = new EnvStack();
 		return instance;

@@ -65,12 +65,13 @@ public class BinaryOperation extends Expression{
 	public Value Eval(){
 		Value val = null;
 		try {	/* type checking */ 
-			if(this.op == BinaryOperator.plus)
+	/*		if(this.op == BinaryOperator.plus)
 			{
 				
 				val = new IntValue(Integer.parseInt(e1.Eval().toString())+Integer.parseInt(e2.Eval().toString()));// evaluate, 
 				return val;		
 			}
+	*/
 			switch(this.op){
 			
 			case plus:	val = new IntValue(Integer.parseInt(e1.Eval().toString())+Integer.parseInt(e2.Eval().toString()));// evaluate, 
