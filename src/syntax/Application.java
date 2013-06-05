@@ -22,7 +22,7 @@ public class Application extends Expression{
 	{
 		
 		Value funcValue = func.Eval();
-		//System.out.println("App func type = " + funcValue.getType());
+		
 		if(funcValue.getType() != Type.FUNCITON){
 			System.out.println("Application type error: func is NOT a function");
 			return null;

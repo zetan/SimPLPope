@@ -26,6 +26,7 @@ public class IntValue extends Value{
 	public IntValue(Integer value){
 		
 		this.value = value;
+		this.type = Type.INT;
 	}
 	public IntValue(int value){
 		

@@ -25,12 +25,15 @@ public class IfThenElse extends Expression{
 			{
 				return thenClause.Eval();
 			}
-			else if(Integer.parseInt(condition.Eval().toString()) > 0)
+		/*	else if(Integer.parseInt(condition.Eval().toString()) > 0)
 			{
 				return thenClause.Eval();
 			}
 			else
 			{
+				return elseClause.Eval();
+			}*/
+			else{
 				return elseClause.Eval();
 			}
 		} catch (Exception e) {

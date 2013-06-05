@@ -80,7 +80,10 @@ public class BinaryOperation extends Expression{
 			case minus:	val = new IntValue(Integer.parseInt(e1.Eval().toString())-Integer.parseInt(e2.Eval().toString()));// evaluate, 
 						return val;	
 						
-			case times:	val = new IntValue(Integer.parseInt(e1.Eval().toString())*Integer.parseInt(e2.Eval().toString()));// evaluate, 
+			case times:	
+					//	System.out.println("e1.eval = " + e1.Eval());
+					//	System.out.println("e2.eval = " + e2.Eval());
+						val = new IntValue(Integer.parseInt(e1.Eval().toString())*Integer.parseInt(e2.Eval().toString()));// evaluate, 
 						return val;	
 						
 			case devide:if(Integer.parseInt(e2.Eval().toString()) == 0){ System.out.println("num error"); return null;}val = new IntValue(Integer.parseInt(e1.Eval().toString())/Integer.parseInt(e2.Eval().toString()));// evaluate, 
@@ -96,7 +99,10 @@ public class BinaryOperation extends Expression{
 			 else val = new BoolValue(false); 
 		return val;	
 				
-			case equal: if(Integer.parseInt(e1.Eval().toString()) == Integer.parseInt(e2.Eval().toString()))
+			case equal: 
+			//	System.out.println("x = " + e1.Eval().toString());
+			//	System.out.println("e2 = " + e2.Eval().toString());
+				if(Integer.parseInt(e1.Eval().toString()) == Integer.parseInt(e2.Eval().toString()))
 				val = new BoolValue(true);// evaluate, 
 			 else val = new BoolValue(false); 
 		return val;	
