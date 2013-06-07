@@ -44,6 +44,7 @@ public class EnvStack {
 	public void PopEnv(){
 		envStack.remove(envStack.size() -1);
 	}
+	public Env getStackTop(){return envStack.get(envStack.size() -1);}
 	
 	public int getStackNum(){
 		return envStack.size();

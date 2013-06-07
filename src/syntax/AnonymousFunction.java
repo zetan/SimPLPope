@@ -50,6 +50,10 @@ public class AnonymousFunction extends Value{
 		fun.arg = (Variable)(arg.clone());
 		fun.body = (Expression)(body.clone());
 		fun.env = (Env)(env.clone());
+		if(fun.body.getType() == Type.FUNCITON){
+			AnonymousFunction funcBody = (AnonymousFunction)fun.body;
+			funcBody.setEnv(fun.env);
+		}
 		return fun;
 	}
 

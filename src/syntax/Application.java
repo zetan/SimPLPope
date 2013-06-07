@@ -29,9 +29,16 @@ public class Application extends Expression{
 			return null;
 		}
 		AnonymousFunction function = (AnonymousFunction)funcValue;
+		try {
+			function = (AnonymousFunction)function.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 		System.out.println("---------------Application-------------------------");
+		//Env funcEnv = (Env)function.getEnv().clone();
 		function.getEnv().AddValue(function.getArg().toString(), param.Eval(env));
 		System.out.println("function.getEnv = " + function.getEnv());
 		System.out.println("function.body = " + function.getBody());

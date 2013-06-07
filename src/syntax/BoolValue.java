@@ -2,6 +2,7 @@ package syntax;
 
 import java.security.PublicKey;
 
+import semantics.Env;
 import semantics.Type;
 
 public class BoolValue extends Value{
@@ -19,7 +20,7 @@ public class BoolValue extends Value{
 		this.value = value;
 		type = Type.BOOL;
 	}
-	public Value Eval()
+	public Value Eval(Env env)
 	{
 		//BoolValue
 		return this;

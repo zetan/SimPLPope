@@ -52,10 +52,10 @@ non terminal Expression val;
 /**//* The grammar */
 
 precedence nonassoc COMMA;
-precedence nonassoc SEQUENCE;
+precedence left SEQUENCE;
 precedence nonassoc ARROW;
 precedence nonassoc ASSIGN;
-precedence nonassoc APPEND;
+precedence right APPEND;
 precedence left OR, AND;
 precedence nonassoc EQ , LT , GT ; 
 precedence left PLUS, MINUS;

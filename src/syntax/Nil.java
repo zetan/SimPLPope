@@ -7,7 +7,7 @@ import semantics.Type;
 public class Nil extends Value{
 	
 	public Type getType(){
-		type = Type.LIST;
+		type = Type.UNIT;
 		return type;
 	}
 	

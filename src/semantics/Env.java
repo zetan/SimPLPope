@@ -23,6 +23,7 @@ public class Env implements Cloneable{
 		
 	}
 	public void AddValue(String var, Value val){
+		varSet.add(var);
 		valueMap.put(var, val);
 	}
 

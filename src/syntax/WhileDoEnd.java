@@ -1,5 +1,7 @@
 package syntax;
 
+import semantics.Env;
+
 public class WhileDoEnd extends Expression{
 	Expression condition;
 	Expression body;
@@ -12,5 +14,13 @@ public class WhileDoEnd extends Expression{
 
 	public String toString(){
 		return "while " + condition.toString() + " do " + body.toString() + " end";
+	}
+	public Value Eval(Env env)
+	{
+		while( condition.Eval(env).toString() == "true")
+		{
+			body.Eval(env);
+		}
+		return new Nil();
 	}
 }

@@ -1,5 +1,8 @@
 package syntax;
 
+import semantics.Env;
+import semantics.EnvStack;
+
 public class Assignment extends Expression{
 	Expression var;
 	Expression val;
@@ -12,5 +15,16 @@ public class Assignment extends Expression{
 
 	public String toString(){
 		return var.toString() + " := " + val.toString();
+	}
+	public Value Eval(Env env)
+	{
+		if(!var.getClass().getName().contains("Variable")){
+			System.out.println(this.getClass().getName() + ": Type error: var is not a Variable");
+		}
+		Variable v = (Variable)var;
+		Value value = val.Eval(env);
+		if(env != null) env.AddValue(var.toString(), value);
+		EnvStack.getInstance().getStackTop().AddValue(v.toString(), value);
+		return new Nil();
 	}
 }

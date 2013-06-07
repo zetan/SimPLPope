@@ -24,22 +24,28 @@ public class UnaryOperation extends Expression{
 	public UnaryOperation(String s,Expression e) {
 		super();
 		this.e = e;
-		if(s == "not") this.op = UnaryOperator.not;	
-		if(s == "~")this.op = UnaryOperator.negative;
+		if(s == "not") this.op = UnaryOperator.negative;	
+		if(s == "~")this.op = UnaryOperator.not;
 	}
 	
 	public Value Eval(Env env){
-		Value val = null;
+		Value val = e.Eval(env);
 		
 		try {
 			
-			if(this.op == UnaryOperator.negative) val = new IntValue(~Integer.parseInt(e.Eval(env).toString()));
-			if(this.op == UnaryOperator.not) val = new IntValue(-Integer.parseInt(e.Eval(env).toString()));	
+			if(this.op == UnaryOperator.not) val = new IntValue(~Integer.parseInt(val.toString()));
+			if(this.op == UnaryOperator.negative) 
+			{
+				if(e.getType()== type.INT)val = new IntValue(-Integer.parseInt(val.toString()));	
+				if(e.getType()== type.BOOL)
+						if(val.toString() == "true")val =new BoolValue(false);
+						else val = new BoolValue(true); 
+			}
 			return val;
 			
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println("head type error");
+			System.out.println("type error");
 		}
 		return null;
 
