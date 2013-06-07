@@ -3,6 +3,7 @@ package semantics;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import syntax.Value;
@@ -54,6 +55,13 @@ public class Env {
 		this.valueMap = valueMap;
 	}
 	
+	public String toString(){
+		String str = "";
+		for(Entry<String, Value> entry : valueMap.entrySet()){
+			str += entry.getKey() + " = " + entry.getValue().toString() + "\t";
+		}
+		return str;
+	}
 	
 	
 }
