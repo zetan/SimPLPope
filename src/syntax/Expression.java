@@ -1,5 +1,6 @@
 package syntax;
 
+import semantics.Env;
 import semantics.EnvStack;
 import semantics.Type;
 
@@ -13,7 +14,7 @@ public class Expression
 	
 	public boolean CheckType(){return true;}
 	//implement this method and fill the real value into value
-	public Value Eval(){return null;}
+	public Value Eval(Env env){return null;}
 	
 /*	public Value getValue() {
 		return value;
