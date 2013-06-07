@@ -1,5 +1,7 @@
 package syntax;
 
+import semantics.Env;
+
 public class Bracket extends Expression{
 	Expression e;
 	
@@ -11,8 +13,8 @@ public class Bracket extends Expression{
 	public String toString(){
 		return "(" + e.toString() + ")";
 	}
-	public Value Eval()
+	public Value Eval(Env env)
 	{
-		return e.Eval();
+		return e.Eval(env);
 	}
 }

@@ -36,4 +36,13 @@ public class Variable extends Expression{
 		type = EnvStack.getInstance().getVarType(this);
 		return type;
 	}
+	
+	public Object clone() throws CloneNotSupportedException
+	{
+		Variable var =null;
+		var = (Variable)super.clone();
+		var.name = name;
+		return var;
+		
+	}
 }

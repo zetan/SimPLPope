@@ -71,4 +71,10 @@ public class Value extends Expression{
 		this.pair = pair;
 	}
 	*/
+	public Object clone() throws CloneNotSupportedException
+	{
+		Value v = null;
+		v = (Value)super.clone();
+		return v;
+	}
 }

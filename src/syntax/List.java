@@ -12,8 +12,8 @@ public class List extends Expression{
 	Expression head;
 	Expression tail;	
 	
-	public Value Eval(){
-		return new ListValue(head.Eval(), tail.Eval());
+	public Value Eval(Env env){
+		return new ListValue(head.Eval(env), tail.Eval(env));
 	}
 	
 	public Type getType(){

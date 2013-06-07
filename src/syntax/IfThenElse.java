@@ -1,5 +1,7 @@
 package syntax;
 
+import semantics.Env;
+
 public class IfThenElse extends Expression{
 	Expression condition;
 	Expression thenClause;
@@ -17,13 +19,13 @@ public class IfThenElse extends Expression{
 		this.elseClause = elseClause;
 	}
 	
-	public Value Eval()
+	public Value Eval(Env env)
 	{
 		Value value = null;
 		try {
-			if( condition.Eval().toString() == "true")
+			if( condition.Eval(env).toString() == "true")
 			{
-				return thenClause.Eval();
+				return thenClause.Eval(env);
 			}
 		/*	else if(Integer.parseInt(condition.Eval().toString()) > 0)
 			{
@@ -34,7 +36,7 @@ public class IfThenElse extends Expression{
 				return elseClause.Eval();
 			}*/
 			else{
-				return elseClause.Eval();
+				return elseClause.Eval(env);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -20,7 +20,7 @@ public class LetInEnd extends Expression{
 		this.body = body;
 	}
 	
-	public Value Eval(){
+	public Value Eval(Env _env){
 		//CheckType();
 		orgStackNum = EnvStack.getInstance().getStackNum();
 		Env env = new Env();
@@ -31,11 +31,11 @@ public class LetInEnd extends Expression{
 		
 		EnvStack.getInstance().PushEnv(env);
 		
-		Value xDef = definition.Eval();
+		Value xDef = definition.Eval(env);
 		env.getTypeMap().put(x.toString(), xDef.getType());				// set var type
 		EnvStack.getInstance().getVarEnv(x).AddValue(x.toString(), xDef);//set var value
 		
-		Value value = body.Eval();
+		Value value = body.Eval(env);
 		
 		int curStackNum =  EnvStack.getInstance().getStackNum();
 		for(int i = 0; i < curStackNum - orgStackNum; i++)

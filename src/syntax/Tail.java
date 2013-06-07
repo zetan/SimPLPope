@@ -1,5 +1,7 @@
 package syntax;
 
+import semantics.Env;
+
 public class Tail extends Expression{
 	Expression e;	
 	
@@ -12,9 +14,9 @@ public class Tail extends Expression{
 		return "tail " + e.toString();
 	}
 	
-	public Value Eval()
+	public Value Eval(Env env)
 	{
-		Value eValue = e.Eval();
+		Value eValue = e.Eval(env);
 		
 		try {
 			ListValue listValue = (ListValue)eValue; /* type checking */

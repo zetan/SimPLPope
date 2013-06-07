@@ -59,5 +59,13 @@ public class AnonymousFunction extends Value{
 	//	System.out.println("push env");
 		return this;
 	}
+	public Object clone() throws CloneNotSupportedException
+	{
+		AnonymousFunction fun = null;
+		fun = (AnonymousFunction) super.clone();
+		fun.arg = (Variable)(arg.clone());
+		fun.body = (Expression)(body.clone());
+		return fun;
+	}
 	
 }

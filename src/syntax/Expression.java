@@ -4,7 +4,7 @@ import semantics.Env;
 import semantics.EnvStack;
 import semantics.Type;
 
-public class Expression
+public class Expression implements Cloneable
 {
 	protected Type type;
 //	protected Value value;
@@ -36,5 +36,10 @@ public class Expression
 	public boolean IsVar(){
 		if(this.getClass().getName().contains("Variable")) return true;
 		else return false;
+	}
+
+	public Object clone() throws CloneNotSupportedException
+	{
+		return super.clone();
 	}
 }

@@ -1,5 +1,6 @@
 package syntax;
 
+import semantics.Env;
 import semantics.EnvStack;
 import semantics.Type;
 
@@ -16,10 +17,10 @@ public class Head extends Expression{
 		return "head " + e.toString();
 	}
 	
-	public Value Eval(){
+	public Value Eval(Env env){
 	
 		//CheckType();
-		Value eValue = e.Eval();
+		Value eValue = e.Eval(env);
 		
 		try {
 			ListValue listValue = (ListValue)eValue; /* type checking */

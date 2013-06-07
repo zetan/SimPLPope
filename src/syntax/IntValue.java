@@ -32,4 +32,13 @@ public class IntValue extends Value{
 		
 		this.value = value;
 	}
+	
+	public Object clone() throws CloneNotSupportedException
+	{
+		IntValue val = null;
+		val = (IntValue)super.clone();
+		val.value =value;
+		val.isUndef =isUndef;
+		return val;
+	}
 }

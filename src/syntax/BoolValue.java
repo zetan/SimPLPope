@@ -24,4 +24,11 @@ public class BoolValue extends Value{
 		//BoolValue
 		return this;
 	}
+	public Object clone() throws CloneNotSupportedException
+	{
+		BoolValue bv = null;
+		bv = (BoolValue)super.clone();
+		bv.value = value;
+		return bv;
+	}
 }

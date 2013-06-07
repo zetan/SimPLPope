@@ -18,10 +18,10 @@ public class Application extends Expression{
 		this.param = param;
 	}
 
-	public Value Eval()
+	public Value Eval(Env env)
 	{
 		
-		Value funcValue = func.Eval();
+		Value funcValue = func.Eval(env);
 		
 		if(funcValue.getType() != Type.FUNCITON){
 			System.out.println("Application type error: func is NOT a function");
@@ -29,8 +29,8 @@ public class Application extends Expression{
 		}
 		AnonymousFunction function = (AnonymousFunction)funcValue;
 		System.out.println("Application function.getArg() = "+ function.getArg());
-		EnvStack.getInstance().getVarEnv(function.getArg()).AddValue(function.getArg().toString(), param.Eval());
-		return function.getBody().Eval();
+		EnvStack.getInstance().getVarEnv(function.getArg()).AddValue(function.getArg().toString(), param.Eval(env));
+		return function.getBody().Eval(env);
 		
 	}
 

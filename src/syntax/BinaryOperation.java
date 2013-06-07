@@ -1,4 +1,5 @@
 package syntax;
+import semantics.Env;
 import semantics.EnvStack;
 import semantics.Type;
 
@@ -62,7 +63,7 @@ public class BinaryOperation extends Expression{
 		}
 	}
 	
-	public Value Eval(){
+	public Value Eval(Env env){
 		Value val = null;
 		try {	/* type checking */ 
 	/*		if(this.op == BinaryOperator.plus)
@@ -74,27 +75,27 @@ public class BinaryOperation extends Expression{
 	*/
 			switch(this.op){
 			
-			case plus:	val = new IntValue(Integer.parseInt(e1.Eval().toString())+Integer.parseInt(e2.Eval().toString()));// evaluate, 
+			case plus:	val = new IntValue(Integer.parseInt(e1.Eval(env).toString())+Integer.parseInt(e2.Eval(env).toString()));// evaluate, 
 						return val;		
 						
-			case minus:	val = new IntValue(Integer.parseInt(e1.Eval().toString())-Integer.parseInt(e2.Eval().toString()));// evaluate, 
+			case minus:	val = new IntValue(Integer.parseInt(e1.Eval(env).toString())-Integer.parseInt(e2.Eval(env).toString()));// evaluate, 
 						return val;	
 						
 			case times:	
 					//	System.out.println("e1.eval = " + e1.Eval());
 					//	System.out.println("e2.eval = " + e2.Eval());
-						val = new IntValue(Integer.parseInt(e1.Eval().toString())*Integer.parseInt(e2.Eval().toString()));// evaluate, 
+						val = new IntValue(Integer.parseInt(e1.Eval(env).toString())*Integer.parseInt(e2.Eval(env).toString()));// evaluate, 
 						return val;	
 						
-			case devide:if(Integer.parseInt(e2.Eval().toString()) == 0){ System.out.println("num error"); return null;}val = new IntValue(Integer.parseInt(e1.Eval().toString())/Integer.parseInt(e2.Eval().toString()));// evaluate, 
+			case devide:if(Integer.parseInt(e2.Eval(env).toString()) == 0){ System.out.println("num error"); return null;}val = new IntValue(Integer.parseInt(e1.Eval(env).toString())/Integer.parseInt(e2.Eval(env).toString()));// evaluate, 
 						return val;	
 					
-			case biggerThan: if(Integer.parseInt(e1.Eval().toString())>Integer.parseInt(e2.Eval().toString()))
+			case biggerThan: if(Integer.parseInt(e1.Eval(env).toString())>Integer.parseInt(e2.Eval(env).toString()))
 								val = new BoolValue(true);// evaluate, 
 							 else val = new BoolValue(false); 
 						return val;	
 				
-			case lessThan: if(Integer.parseInt(e1.Eval().toString())<Integer.parseInt(e2.Eval().toString()))
+			case lessThan: if(Integer.parseInt(e1.Eval(env).toString())<Integer.parseInt(e2.Eval(env).toString()))
 				val = new BoolValue(true);// evaluate, 
 			 else val = new BoolValue(false); 
 		return val;	
@@ -102,16 +103,16 @@ public class BinaryOperation extends Expression{
 			case equal: 
 			//	System.out.println("x = " + e1.Eval().toString());
 			//	System.out.println("e2 = " + e2.Eval().toString());
-				if(Integer.parseInt(e1.Eval().toString()) == Integer.parseInt(e2.Eval().toString()))
+				if(Integer.parseInt(e1.Eval(env).toString()) == Integer.parseInt(e2.Eval(env).toString()))
 				val = new BoolValue(true);// evaluate, 
 			 else val = new BoolValue(false); 
 		return val;	
 				
 			case and:
-				val = new IntValue(Integer.parseInt(e1.Eval().toString())&Integer.parseInt(e2.Eval().toString()));// evaluate, 
+				val = new IntValue(Integer.parseInt(e1.Eval(env).toString())&Integer.parseInt(e2.Eval(env).toString()));// evaluate, 
 				return val;	
 			case or:
-				val = new IntValue(Integer.parseInt(e1.Eval().toString())|Integer.parseInt(e2.Eval().toString()));// evaluate, 
+				val = new IntValue(Integer.parseInt(e1.Eval(env).toString())|Integer.parseInt(e2.Eval(env).toString()));// evaluate, 
 				return val;	
 			}
 			

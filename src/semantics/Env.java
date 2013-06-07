@@ -80,8 +80,8 @@ public class Env implements Cloneable{
 			{
 				Map.Entry<String, Value> entry = it2.next();
 				String K = entry.getKey();
-				Value V = entry.getValue();
-				cloned.valueMap.put(new String(K), null);
+				Value V = (Value)(entry.getValue().clone());
+				cloned.valueMap.put(new String(K), V);
 			}
 			
 			

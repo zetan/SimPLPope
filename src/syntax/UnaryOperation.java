@@ -1,5 +1,7 @@
 package syntax;
 
+import semantics.Env;
+
 public class UnaryOperation extends Expression{
 	enum UnaryOperator{
 		not, negative
@@ -26,13 +28,13 @@ public class UnaryOperation extends Expression{
 		if(s == "~")this.op = UnaryOperator.negative;
 	}
 	
-	public Value Eval(){
+	public Value Eval(Env env){
 		Value val = null;
 		
 		try {
 			
-			if(this.op == UnaryOperator.negative) val = new IntValue(~Integer.parseInt(e.Eval().toString()));
-			if(this.op == UnaryOperator.not) val = new IntValue(-Integer.parseInt(e.Eval().toString()));	
+			if(this.op == UnaryOperator.negative) val = new IntValue(~Integer.parseInt(e.Eval(env).toString()));
+			if(this.op == UnaryOperator.not) val = new IntValue(-Integer.parseInt(e.Eval(env).toString()));	
 			return val;
 			
 		} catch (Exception e) {
