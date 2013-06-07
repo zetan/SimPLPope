@@ -13,7 +13,7 @@ public class SimplPope {
                 new Lexer(new FileReader("src/TestProgram")));
             Expression expression = (Expression) parser.parse().value;
             //System.out.println(expression.toString());
-            Value value = expression.Eval();
+            Value value = expression.Eval(null);
             System.out.println(value.toString());
         }
         catch (Exception e) {

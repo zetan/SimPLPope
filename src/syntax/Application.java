@@ -21,6 +21,7 @@ public class Application extends Expression{
 	public Value Eval(Env env)
 	{
 		
+		if(env == null) env = new Env();
 		Value funcValue = func.Eval(env);
 		
 		if(funcValue.getType() != Type.FUNCITON){
@@ -28,9 +29,16 @@ public class Application extends Expression{
 			return null;
 		}
 		AnonymousFunction function = (AnonymousFunction)funcValue;
-		System.out.println("Application function.getArg() = "+ function.getArg());
-		EnvStack.getInstance().getVarEnv(function.getArg()).AddValue(function.getArg().toString(), param.Eval(env));
-		return function.getBody().Eval(env);
+		
+		
+		System.out.println("---------------Application-------------------------");
+		function.getEnv().AddValue(function.getArg().toString(), param.Eval(env));
+		System.out.println("function.getEnv = " + function.getEnv());
+		System.out.println("function.body = " + function.getBody());
+		//merge the env
+		if(function.getBody().getType() != Type.FUNCITON)
+			EnvStack.getInstance().PushEnv(function.getEnv());
+		return function.getBody().Eval(function.getEnv());
 		
 	}
 

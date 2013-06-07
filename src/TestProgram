@@ -1,6 +1,13 @@
 let
-f = fun x -> ( if x = 1 then 1 else x * ( f (x - 1)) end )
+	mod = fun x -> fun y -> x - x / y * y
 in
-( f 4 )
+	let
+		gcd = fun x -> fun y ->
+			if ( (mod x ) y ) = 0
+			then y
+			else ( ( gcd y ) ( (mod x ) y ) )
+			end
+	in
+		( ( gcd 34986 ) 3087 )
+	end
 end
-

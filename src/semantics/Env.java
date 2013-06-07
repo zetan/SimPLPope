@@ -107,7 +107,7 @@ public class Env implements Cloneable{
 	public String toString(){
 		String str = "";
 		for(Entry<String, Value> entry : valueMap.entrySet()){
-			str += entry.getKey() + " = " + entry.getValue().toString() + "\t";
+			str += entry.getKey() + " = " + entry.getValue() + "\t";
 		}
 		return str;
 	}

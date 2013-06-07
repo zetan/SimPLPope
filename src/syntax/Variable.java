@@ -1,5 +1,6 @@
 package syntax;
 
+import semantics.Env;
 import semantics.EnvStack;
 import semantics.Type;
 
@@ -22,9 +23,10 @@ public class Variable extends Expression{
 		return name;
 	}
 	
-	public Value Eval(){
+	public Value Eval(Env env){
 		CheckType();
-		return EnvStack.getInstance().getVarValue(this);
+		if(env!= null && env.getValueMap().get(this) != null) return env.getValueMap().get(this);
+		else return EnvStack.getInstance().getVarValue(this);
 	}
 	
 	public boolean CheckType(){

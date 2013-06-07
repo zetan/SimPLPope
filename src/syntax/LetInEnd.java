@@ -35,7 +35,7 @@ public class LetInEnd extends Expression{
 		env.getTypeMap().put(x.toString(), xDef.getType());				// set var type
 		EnvStack.getInstance().getVarEnv(x).AddValue(x.toString(), xDef);//set var value
 		
-		Value value = body.Eval(env);
+		Value value = body.Eval(_env);
 		
 		int curStackNum =  EnvStack.getInstance().getStackNum();
 		for(int i = 0; i < curStackNum - orgStackNum; i++)

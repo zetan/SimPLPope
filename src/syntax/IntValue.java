@@ -1,5 +1,6 @@
 package syntax;
 
+import semantics.Env;
 import semantics.Type;
 
 public class IntValue extends Value{
@@ -13,6 +14,9 @@ public class IntValue extends Value{
 	}
 	
 	public Value Eval(){
+		return this;
+	}
+	public Value Eval(Env env){
 		return this;
 	}
 	
