@@ -20,6 +20,7 @@ public class Assignment extends Expression{
 	{
 		if(!var.getClass().getName().contains("Variable")){
 			System.out.println(this.getClass().getName() + ": Type error: var is not a Variable");
+			return null;
 		}
 		Variable v = (Variable)var;
 		Value value = val.Eval(env);
