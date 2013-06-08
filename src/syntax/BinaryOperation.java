@@ -125,9 +125,14 @@ public class BinaryOperation extends Expression{
 			case equal: 
 			//	System.out.println("x = " + e1.Eval().toString());
 			//	System.out.println("e2 = " + e2.Eval().toString());
-				if(Integer.parseInt(v1.toString()) == Integer.parseInt(v2.toString()))
+		/*		if(Integer.parseInt(v1.toString()) == Integer.parseInt(v2.toString()))
 					val = new BoolValue(true);// evaluate, 
 				 else val = new BoolValue(false); 
+		*/
+				if(v1.getType() != v2.getType()){System.out.println("---------------------");}
+	//			System.out.println("-----------v1 = " + v1 + "\t v2 = " + v2 + "\t isequal = " + v1.isEqual(v2));
+				if(v1.isEqual(v2)) val = new BoolValue(true);
+				else val = new BoolValue(false);
 			return val;	
 		//return val;	
 				

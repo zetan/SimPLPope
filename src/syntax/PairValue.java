@@ -15,7 +15,7 @@ public class PairValue extends Value{
 	}
 
 	Boolean isEqual(Value v){
-		if(v.getType() == Type.PAIR) return false;
+		if(v.getType() != Type.PAIR) return false;
 		PairValue pairV = (PairValue)v;
 		if(e1.isEqual(pairV.getFirst()) && e2.isEqual(pairV.getSecond())) return true;
 		else return false;

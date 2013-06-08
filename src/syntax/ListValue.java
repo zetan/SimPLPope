@@ -17,7 +17,7 @@ public class ListValue extends Value{
 	}
 
 	Boolean isEqual(Value v){
-		if(v.getType() == Type.LIST) return false;
+		if(v.getType() != Type.LIST) return false;
 		ListValue listV = (ListValue)v;
 		if(head.isEqual(listV.getHead()) && tail.isEqual(listV.getTail())) return true;
 		else return false;

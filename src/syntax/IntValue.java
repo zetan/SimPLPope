@@ -39,7 +39,7 @@ public class IntValue extends Value{
 	}
 	
 	Boolean isEqual(Value v){
-		if(v.getType() == Type.INT) return false;
+		if(v.getType() != Type.INT) return false;
 		if(this.toString().equals(v.toString())) return true;
 		else return false;
 	}
