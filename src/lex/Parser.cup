@@ -46,7 +46,7 @@ terminal  TRUE;
 terminal  FALSE;
 terminal  END_OF_PROGRAM;
 
-
+non terminal Expression program;
 non terminal Expression expr;
 non terminal Expression val;
 /**//* The grammar */
@@ -63,7 +63,12 @@ precedence left TIMES, DIVIDE;
 precedence left UNARY_MINUS,NEGATION;  
 precedence right FST, SND, HEAD, TAIL;         
 precedence nonassoc LEFT_PAREN, RIGHT_PAREN;
-         
+       
+
+program ::= expr:e END_OF_PROGRAM
+		{:RESULT = e;:}
+		;
+		
 expr  ::= VAR:v
     {:RESULT = new Variable(v);:}
     | val:v
