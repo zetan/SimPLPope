@@ -302,7 +302,7 @@ public static void main(String [] args) throws IOException
    *
    * @param   in  the java.io.Inputstream to read input from.
    */
-  Lexer(java.io.InputStream in) {
+  public Lexer(java.io.InputStream in) {
     this(new java.io.InputStreamReader(in));
   }
 
@@ -802,6 +802,7 @@ public static void main(String [] args) throws IOException
           { 
           }
         case 84: break;
+        case -1: return  symbol(sym.EOF);
         default: 
           if (zzInput == YYEOF && zzStartRead == zzCurrentPos) {
             zzAtEOF = true;

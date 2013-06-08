@@ -12,7 +12,7 @@ public class SimplPope {
 		Expression expression = null;
 		try {
 			parser = new Parser(
-                new Lexer(new FileReader("src/TestProgram")));
+                new Lexer(System.in));
             expression = (Expression) parser.parse().value;
             //System.out.println(expression.toString());
            
