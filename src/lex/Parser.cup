@@ -53,16 +53,16 @@ non terminal Expression val;
 
 precedence nonassoc COMMA;
 precedence left SEQUENCE;
-precedence nonassoc ARROW;
-precedence nonassoc ASSIGN;
+precedence right ARROW;
+precedence right ASSIGN;
 precedence right APPEND;
 precedence left OR, AND;
 precedence nonassoc EQ , LT , GT ; 
 precedence left PLUS, MINUS;
 precedence left TIMES, DIVIDE;
 precedence left UNARY_MINUS,NEGATION;  
-precedence nonassoc FST, SND, HEAD, TAIL;         
-         
+precedence right FST, SND, HEAD, TAIL;         
+precedence nonassoc LEFT_PAREN, RIGHT_PAREN;
          
 expr  ::= VAR:v
     {:RESULT = new Variable(v);:}
