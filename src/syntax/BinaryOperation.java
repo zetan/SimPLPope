@@ -65,7 +65,10 @@ public class BinaryOperation extends Expression{
 	
 	public Value Eval(Env env){
 		Value val = null;
-		try {	/* type checking */ 
+		Value v1, v2;
+		v1 = e1.Eval(env);
+		v2 = e2.Eval(env);
+	//	try {	/* type checking */ 
 	/*		if(this.op == BinaryOperator.plus)
 			{
 				
@@ -75,54 +78,89 @@ public class BinaryOperation extends Expression{
 	*/
 			switch(this.op){
 			
-			case plus:	val = new IntValue(Integer.parseInt(e1.Eval(env).toString())+Integer.parseInt(e2.Eval(env).toString()));// evaluate, 
-						return val;		
+			case plus:	
+						if(v1.getType() != Type.INT || v2.getType() != Type.INT){
+							System.out.println("Binary type error: op = +, e1 = " + e1.toString() + ", e2 = " + e2.toString());
+						}
+						return new IntValue(Integer.parseInt(v1.toString())+Integer.parseInt(v2.toString()));
+								
 						
-			case minus:	val = new IntValue(Integer.parseInt(e1.Eval(env).toString())-Integer.parseInt(e2.Eval(env).toString()));// evaluate, 
-						return val;	
+			case minus:	
+					if(v1.getType() != Type.INT || v2.getType() != Type.INT){
+						System.out.println("Binary type error: op = -, e1 = " + e1.toString() + ", e2 = " + e2.toString());
+					}
+					return new IntValue(Integer.parseInt(v1.toString())-Integer.parseInt(v2.toString()));
 						
 			case times:	
-					//	System.out.println("e1.eval = " + e1.Eval());
-					//	System.out.println("e2.eval = " + e2.Eval());
-						val = new IntValue(Integer.parseInt(e1.Eval(env).toString())*Integer.parseInt(e2.Eval(env).toString()));// evaluate, 
-						return val;	
+				if(v1.getType() != Type.INT || v2.getType() != Type.INT){
+					System.out.println("Binary type error: op = *, e1 = " + e1.toString() + ", e2 = " + e2.toString());
+				}
+				return new IntValue(Integer.parseInt(v1.toString())*Integer.parseInt(v2.toString()));
 						
-			case devide:if(Integer.parseInt(e2.Eval(env).toString()) == 0){ System.out.println("num error"); return null;}val = new IntValue(Integer.parseInt(e1.Eval(env).toString())/Integer.parseInt(e2.Eval(env).toString()));// evaluate, 
-						return val;	
+			case devide:
+				if(v1.getType() != Type.INT || v2.getType() != Type.INT){
+					System.out.println("Binary type error: op = /, e1 = " + e1.toString() + ", e2 = " + e2.toString());
+				}
+					if(Integer.parseInt(v2.toString()) == 0){System.out.println("DIVIOR is ZERO: " + v2.toString());}
+					return new IntValue(Integer.parseInt(v1.toString())/Integer.parseInt(v2.toString()));
 					
-			case biggerThan: if(Integer.parseInt(e1.Eval(env).toString())>Integer.parseInt(e2.Eval(env).toString()))
+			case biggerThan: 
+				if(v1.getType() != Type.INT || v2.getType() != Type.INT){
+					System.out.println("Binary type error: op = >, e1 = " + e1.toString() + ", e2 = " + e2.toString());
+				}
+				if(Integer.parseInt(v1.toString())>Integer.parseInt(v2.toString()))
 								val = new BoolValue(true);// evaluate, 
 							 else val = new BoolValue(false); 
 						return val;	
 				
-			case lessThan: if(Integer.parseInt(e1.Eval(env).toString())<Integer.parseInt(e2.Eval(env).toString()))
-				val = new BoolValue(true);// evaluate, 
-			 else val = new BoolValue(false); 
-		return val;	
+			case lessThan: 
+				if(v1.getType() != Type.INT || v2.getType() != Type.INT){
+					System.out.println("Binary type error: op = <, e1 = " + e1.toString() + ", e2 = " + e2.toString());
+				}
+				if(Integer.parseInt(v1.toString())<Integer.parseInt(v2.toString()))
+					val = new BoolValue(true);// evaluate, 
+				else val = new BoolValue(false); 
+				return val;	
 				
 			case equal: 
 			//	System.out.println("x = " + e1.Eval().toString());
 			//	System.out.println("e2 = " + e2.Eval().toString());
-				if(Integer.parseInt(e1.Eval(env).toString()) == Integer.parseInt(e2.Eval(env).toString()))
-				val = new BoolValue(true);// evaluate, 
-			 else val = new BoolValue(false); 
-		return val;	
+				if(Integer.parseInt(v1.toString()) == Integer.parseInt(v2.toString()))
+					val = new BoolValue(true);// evaluate, 
+				 else val = new BoolValue(false); 
+			return val;	
+		//return val;	
 				
 			case and:
-				val = new IntValue(Integer.parseInt(e1.Eval(env).toString())&Integer.parseInt(e2.Eval(env).toString()));// evaluate, 
-				return val;	
+				
+				if(v1.getType() != Type.BOOL || v2.getType() != Type.BOOL){
+					System.out.println(this.getClass().getName() + "type error:AND, is not bool value");
+				}
+				if(v1.toString().equals("true") && v2.toString().equals("true")) return new BoolValue(true);
+				else return new BoolValue(false);
+			//	if(e1.Eval(env).toString() == "true" e2.Eval(env).toString())
+			//	val = new IntValue(Integer.parseInt(e1.Eval(env).toString())&Integer.parseInt(e2.Eval(env).toString()));// evaluate, 
+			//	return val;	
 			case or:
-				val = new IntValue(Integer.parseInt(e1.Eval(env).toString())|Integer.parseInt(e2.Eval(env).toString()));// evaluate, 
-				return val;	
+				
+				if(v1.getType() != Type.BOOL || v2.getType() != Type.BOOL){
+					System.out.println(this.getClass().getName() + "type error:OR is not bool value");
+				}
+				if(v1.toString().equals("true") || v2.toString().equals("true")) return new BoolValue(true);
+				else return new BoolValue(false);
+			//	val = new IntValue(Integer.parseInt(e1.Eval(env).toString())|Integer.parseInt(e2.Eval(env).toString()));// evaluate, 
+			//	return val;	
 			}
 			
-		} 
-		catch (Exception e) {
+			 
+	return null;
+	}
+	/*	catch (Exception e) {
 				// TODO: handle exception
-			System.out.println("type error");
+			System.out.println("Binary type error");
 		}
 		return null;
 		
-	}
+	}*/
 	
 }
