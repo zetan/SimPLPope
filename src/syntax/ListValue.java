@@ -28,6 +28,7 @@ public class ListValue extends Value{
 	}
 
 	public void setHead(Value head) {
+		
 		this.head = head;
 	}
 

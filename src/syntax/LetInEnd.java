@@ -26,13 +26,13 @@ public class LetInEnd extends Expression{
 		Env env = new Env();
 		env.getVarSet().add(x.toString());
 		
-		env.getTypeMap().put(x.toString(), definition.getType());
+	//	env.getTypeMap().put(x.toString(), definition.getType());
 		//env.getExpMap().put(x.toString(), (Value)definition);
 		
 		EnvStack.getInstance().PushEnv(env);
 		
 		Value xDef = definition.Eval(env);
-		env.getTypeMap().put(x.toString(), xDef.getType());				// set var type
+//		env.getTypeMap().put(x.toString(), xDef.getType());				// set var type
 		EnvStack.getInstance().getVarEnv(x).AddValue(x.toString(), xDef);//set var value
 		
 		Value value = body.Eval(_env);

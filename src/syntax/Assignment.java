@@ -24,7 +24,8 @@ public class Assignment extends Expression{
 		Variable v = (Variable)var;
 		Value value = val.Eval(env);
 		if(env != null) env.AddValue(var.toString(), value);
-		EnvStack.getInstance().getStackTop().AddValue(v.toString(), value);
+		EnvStack.getInstance().getVarEnv(v).AddValue(v.toString(), value);
+		//EnvStack.getInstance().getStackTop().AddValue(v.toString(), value);
 		return new Nil();
 	}
 }

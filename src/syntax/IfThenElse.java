@@ -1,6 +1,7 @@
 package syntax;
 
 import semantics.Env;
+import semantics.Type;
 
 public class IfThenElse extends Expression{
 	Expression condition;
@@ -21,28 +22,11 @@ public class IfThenElse extends Expression{
 	
 	public Value Eval(Env env)
 	{
-		Value value = null;
-		try {
-			if( condition.Eval(env).toString() == "true")
-			{
-				return thenClause.Eval(env);
-			}
-		/*	else if(Integer.parseInt(condition.Eval().toString()) > 0)
-			{
-				return thenClause.Eval();
-			}
-			else
-			{
-				return elseClause.Eval();
-			}*/
-			else{
-				return elseClause.Eval(env);
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			System.out.println("type error");
-		}
-		return value;
+		Value conValue = condition.Eval(env);
+		if(conValue.getType() != Type.BOOL) System.out.println("if type error");
+		if(conValue.toString().equals("true"))
+			return thenClause.Eval(env);
+		else return elseClause.Eval(env);
 	}
 	
 }

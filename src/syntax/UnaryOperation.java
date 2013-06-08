@@ -43,11 +43,11 @@ public class UnaryOperation extends Expression{
 			} 
 			if(this.op == UnaryOperator.negative) 
 			{
-				if(e.getType()== type.INT){
+				if(val.getType()== type.INT){
 					if(Integer.parseInt(val.toString()) == 0) val = new BoolValue(true);
 					else val = new BoolValue(false);
 				}
-				else if(e.getType()== type.BOOL){
+				else if(val.getType()== type.BOOL){
 					if(val.toString().equals("true"))val =new BoolValue(false);
 					else val = new BoolValue(true); 
 				}
