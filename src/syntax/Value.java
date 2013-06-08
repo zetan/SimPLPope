@@ -77,4 +77,8 @@ public class Value extends Expression{
 		v = (Value)super.clone();
 		return v;
 	}
+	
+	Boolean isEqual(Value v){
+		return false;
+	}
 }

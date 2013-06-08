@@ -35,6 +35,13 @@ public class IntValue extends Value{
 	public IntValue(int value){
 		
 		this.value = value;
+		this.type = Type.INT;
+	}
+	
+	Boolean isEqual(Value v){
+		if(v.getType() == Type.INT) return false;
+		if(this.toString().equals(v.toString())) return true;
+		else return false;
 	}
 	
 	public Object clone() throws CloneNotSupportedException

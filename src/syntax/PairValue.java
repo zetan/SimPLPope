@@ -14,7 +14,12 @@ public class PairValue extends Value{
 		type = Type.PAIR;
 	}
 
-
+	Boolean isEqual(Value v){
+		if(v.getType() == Type.PAIR) return false;
+		PairValue pairV = (PairValue)v;
+		if(e1.isEqual(pairV.getFirst()) && e2.isEqual(pairV.getSecond())) return true;
+		else return false;
+	}
 	public String toString(){
 		return "(" + e1.toString() + ", " + e2.toString() + ")";
 	}

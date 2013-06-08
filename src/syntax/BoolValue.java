@@ -32,4 +32,9 @@ public class BoolValue extends Value{
 		bv.value = value;
 		return bv;
 	}
+	Boolean isEqual(Value v){
+		if(v.getType() == Type.BOOL) return false;
+		if(this.toString().equals(v.toString())) return true;
+		else return false;
+	}
 }
