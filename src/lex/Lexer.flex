@@ -37,9 +37,10 @@ public static void main(String [] args) throws IOException
 digit 			= [0-9]
 intvalue 		= {digit}+
 letter          = [A-Za-z]
+lowercaseletter	= [a-z]
 alphanumeric    = {letter}|{digit}
 other_id_char   = [_]
-identifier      = {letter}({alphanumeric}|{other_id_char})*
+identifier      = {lowercaseletter}({alphanumeric}|{other_id_char})*
 
 %%
 
