@@ -45,7 +45,10 @@ public class Application extends Expression{
 		//merge the env
 		if(function.getBody().getType() != Type.FUNCITON)
 			EnvStack.getInstance().PushEnv(function.getEnv());
-		return function.getBody().Eval(function.getEnv());
+		Value value = function.getBody().Eval(function.getEnv());
+		if(function.getBody().getType() != Type.FUNCITON)
+			EnvStack.getInstance().PopEnv();
+		return value;
 		
 	}
 
