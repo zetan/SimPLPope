@@ -1,6 +1,9 @@
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 import syntax.Expression;
 import syntax.Value;
@@ -12,8 +15,8 @@ public class SimplPope {
 	public static void main(String[] args){
 		if (args.length == 1 && args[0].equals("-s")) {
 			Console();
-		} else if (/*args.length == 2 && */args[0].equals("-f")){
-			FromFile("src/TestProgram");
+		} else if (args.length == 2 && args[0].equals("-f")){
+			FromFile(args[1]);
 		} 
 		else{
 			System.out.println("usage: -s | -f [filename]");
@@ -24,9 +27,33 @@ public class SimplPope {
 		Parser parser = null;
 		Expression expression = null;
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-		parser = new Parser(new Lexer(reader));
+		
+		String code = "";
 		while(true){
 			System.out.print("SimPL>");
+			
+			String line = "";
+			while(true){		//read from System.in until we meet '$'
+				try {
+					line = reader.readLine();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+				code += line;
+				if(line.contains("$")){
+					break;
+				}
+			}
+			byte[] byteCode = null;		// get the input code into byte-array and we will put the byte-array into lexer
+			try {
+				byteCode = code.getBytes("UTF-8");
+			} catch (UnsupportedEncodingException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			code = "";	//waiting for the next iteration
+			
+			parser = new Parser(new Lexer(new ByteArrayInputStream(byteCode)));
 			try {
 				 expression = (Expression) parser.parse().value;
 			}catch (Exception e) {
